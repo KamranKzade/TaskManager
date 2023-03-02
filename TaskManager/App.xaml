@@ -4,6 +4,12 @@
              xmlns:local="clr-namespace:TaskManager"
              StartupUri="Views/MainWindow.xaml">
     <Application.Resources>
-         
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="\ResouceDictionaries\ButtonStyle.xaml"/>
+                <ResourceDictionary Source="\ResouceDictionaries\TextBoxStyle.xaml"/>
+                <ResourceDictionary Source="\ResouceDictionaries\TextBlockStyle.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

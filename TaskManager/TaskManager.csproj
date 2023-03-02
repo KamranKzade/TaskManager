@@ -8,7 +8,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="ResouceDictionaries\" />
+    <None Remove="Views\add.png" />
+    <None Remove="Views\block.png" />
+    <None Remove="Views\create.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\add.png" />
+    <Resource Include="Images\create.png" />
+    <Resource Include="Images\block.png" />
   </ItemGroup>
 
 </Project>

@@ -12,7 +12,7 @@ public class RelayCommand : ICommand
     }
     Action<object> _execute;
     Predicate<object> _canExecute;
-    public RelayCommand(Action<object> execute, Predicate<object> canExecute = null)
+    public RelayCommand(Action<object> execute, Predicate<object> canExecute = null!)
     {
         if (execute == null)
         {

@@ -5,8 +5,198 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TaskManager"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="TaskManager"
+        Height="650" 
+        Width="1000"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize">
+    <Window.Background>
+        <LinearGradientBrush>
+            <GradientStop Color="#8A2387" Offset="0.8"/>
+            <GradientStop Color="#E94057" Offset="0.5"/>
+            <GradientStop Color="#F27121" Offset="0.4"/>
+        </LinearGradientBrush>
+    </Window.Background>
 
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="8*"/>
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0"
+                BorderBrush="Black"
+                BorderThickness="3"/>
+
+        
+        <TextBlock Text="TaskManager"
+                   Style="{StaticResource txt_style}"/>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1.2*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+
+
+            <Grid Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="4.6*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Border Grid.Row="0" BorderBrush="Black" 
+                        BorderThickness="3 0 3 3"/>
+                <TextBlock Grid.Row="0"
+                           Style="{StaticResource txt_style}"
+                           Text="Black List"/>
+
+
+                <ListBox Grid.Row="1"
+                          Name="blockList_datagrid"
+                          VerticalContentAlignment="Center"
+                          HorizontalContentAlignment="Center"
+                          FontSize="20"
+                          BorderThickness="3 0 3 0"
+                          BorderBrush="Black"
+                          FontWeight="Medium"
+                          FontFamily="Comic Sans Ms"
+                          />
+                <Border Grid.Row="2" 
+                        BorderThickness="3"
+                        BorderBrush="Black"/>
+                <Grid Grid.Row="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBox Grid.Column="0"
+                             Name="black_list_txt"
+                             Style="{StaticResource txtBox_style}"
+                             />
+                    <Button Grid.Column="1"
+                            ToolTip="Add Black List"
+                            Style="{StaticResource btnStyle}"
+                            >
+                        <Ellipse Height="70"
+                                 VerticalAlignment="Center"
+                                 HorizontalAlignment="Center"
+                                 Width="80">
+                            <Ellipse.Fill>
+                                <ImageBrush ImageSource="/Images/add.png" Stretch="Uniform"/>
+                            </Ellipse.Fill>
+
+                        </Ellipse>
+                    </Button>
+                </Grid>
+
+            </Grid>
+
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="4.6*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Border Grid.Row="0" BorderBrush="Black" 
+                        BorderThickness="0 0 3 3"/>
+                <TextBlock Grid.Row="0"
+                           Style="{StaticResource txt_style}"
+                           Text="Processes"/>
+
+                <ListView Foreground="Yellow"
+                          Grid.Row="1"
+                          Name="mylistView"
+                          BorderBrush="Black"
+                          BorderThickness="0 0 3 0"
+                          ItemsSource="{Binding Processes}"
+                          >
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Id">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock MinWidth="40" Text="{Binding Id}"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn Header="Name">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding ProcessName}"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn Header="Handle Count">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding HandleCount}"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn Header="Thread Count">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Threads.Count}"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn Header="Machine Name">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding MachineName}"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+
+                <Border Grid.Row="2"
+                        BorderThickness="0 3 3 3"
+                        BorderBrush="Black"/>
+                <Grid Grid.Row="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBox Style="{StaticResource txtBox_style}"
+                             Name="addProcess_txt"
+                             />
+
+                    <Button Grid.Column="1"
+                            ToolTip="Create Process"
+                            Style="{StaticResource btnStyle}">
+                        <Ellipse Height="70"
+                                 VerticalAlignment="Center"
+                                 HorizontalAlignment="Center"
+                                 Width="80">
+                            <Ellipse.Fill>
+                                <ImageBrush ImageSource="/Images/create.png" Stretch="Uniform"/>
+                            </Ellipse.Fill>
+                        </Ellipse>
+                    </Button>
+
+                    <Button Grid.Column="2"
+                            ToolTip="End Task"
+                            Style="{StaticResource btnStyle}">
+                        <Ellipse Height="70"
+                                 VerticalAlignment="Center"
+                                 HorizontalAlignment="Center"
+                                 Width="80">
+                            <Ellipse.Fill>
+                                <ImageBrush ImageSource="/Images/block.png" Stretch="Uniform"/>
+                            </Ellipse.Fill>
+                        </Ellipse>
+                    </Button>
+                </Grid>
+            </Grid>
+            
+        </Grid>
     </Grid>
 </Window>

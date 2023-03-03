@@ -1,17 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Diagnostics;
 using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
+using System.Threading;
+using System.Diagnostics;
+using TaskManager.Commands;
 using System.Windows.Controls;
 using System.Windows.Threading;
-using TaskManager.Commands;
+using System.Collections.ObjectModel;
 
 namespace TaskManager.ViewModels;
+
 
 public class MainViewModel : BaseViewModel
 {
@@ -29,15 +27,13 @@ public class MainViewModel : BaseViewModel
         Processes = new(Process.GetProcesses());
         BlackList = new ObservableCollection<string>();
 
-        DispatcherTimer timer = new DispatcherTimer();
 
-        timer.Interval = TimeSpan.FromMilliseconds(3000);
+        DispatcherTimer timer = new DispatcherTimer();
+        timer.Interval = TimeSpan.FromMilliseconds(5000);
+
 
         timer.Tick += Update_Processes;
-
-
         timer.Tick += DeleteProcessesInBlackList;
-
         timer.Start();
 
 
@@ -66,7 +62,6 @@ public class MainViewModel : BaseViewModel
             {
                 try
                 {
-                    Task.Delay(2000);
                     Process.Start(textbox.Text);
                     MessageBox.Show("Successfully Create Program", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
@@ -77,8 +72,6 @@ public class MainViewModel : BaseViewModel
             }
             else
                 MessageBox.Show("Enter the item", "Information", MessageBoxButton.OK, MessageBoxImage.Warning);
-
-
         });
 
 
@@ -99,23 +92,18 @@ public class MainViewModel : BaseViewModel
 
     private void DeleteProcessesInBlackList(object? sender, EventArgs e)
     {
-        if (BlackList.Count > 0)
+        foreach (var black in BlackList)
         {
-            foreach (var black in BlackList)
-            {
-                var processes = Processes.Where(x => x.ProcessName.ToLower() == black.ToLower());
+            var processes = Processes.Where(x => x.ProcessName.ToLower() == black.ToLower());
 
-                if (processes is null)
-                    return;
-                foreach (var process in processes)
-                    process.Kill();
-
-                MessageBox.Show("Items in blackList were successfully deleted", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
-                BlackList.Remove(black);
+            if (processes is null)
                 return;
+            foreach (var process in processes)
+            {
+                process.Kill();
+            //   MessageBox.Show("Items in blackList were successfully deleted", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
-
     }
 
 

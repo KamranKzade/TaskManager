@@ -17,6 +17,7 @@
     <Resource Include="Images\add.png" />
     <Resource Include="Images\create.png" />
     <Resource Include="Images\block.png" />
+    <Resource Include="Images\system-task.png" />
   </ItemGroup>
 
 </Project>

@@ -9,7 +9,8 @@
         Height="650" 
         Width="1000"
         WindowStartupLocation="CenterScreen"
-        ResizeMode="NoResize">
+        ResizeMode="NoResize"
+         Icon="/Images/system-task.png">
     <Window.Background>
         <LinearGradientBrush>
             <GradientStop Color="#8A2387" Offset="0.8"/>
@@ -39,7 +40,8 @@
             </Grid.ColumnDefinitions>
 
 
-            <Grid Grid.Column="0">
+            <Grid Grid.Column="0"
+                  Name="blackListGrid">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="50"/>
                     <RowDefinition Height="4.6*"/>
@@ -52,20 +54,21 @@
                            Style="{StaticResource txt_style}"
                            Text="Black List"/>
 
-
                 <ListBox Grid.Row="1"
-                          Name="blockList_datagrid"
-                          VerticalContentAlignment="Center"
-                          HorizontalContentAlignment="Center"
-                          FontSize="20"
-                          BorderThickness="3 0 3 0"
-                          BorderBrush="Black"
-                          FontWeight="Medium"
-                          FontFamily="Comic Sans Ms"
+                         VerticalContentAlignment="Center"
+                         HorizontalContentAlignment="Center"
+                         FontSize="20"
+                         BorderThickness="3 0 3 0"
+                         BorderBrush="Black"
+                         FontWeight="Medium"
+                         ItemsSource="{Binding BlackList}"
+                         FontFamily="Comic Sans Ms"
                           />
+                
                 <Border Grid.Row="2" 
                         BorderThickness="3"
                         BorderBrush="Black"/>
+                
                 <Grid Grid.Row="2">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="3*"/>
@@ -73,12 +76,13 @@
                     </Grid.ColumnDefinitions>
 
                     <TextBox Grid.Column="0"
-                             Name="black_list_txt"
                              Style="{StaticResource txtBox_style}"
                              />
                     <Button Grid.Column="1"
                             ToolTip="Add Black List"
                             Style="{StaticResource btnStyle}"
+                            Command="{Binding AddBlackListCommand}"
+                            CommandParameter="{Binding ElementName=blackListGrid}"
                             >
                         <Ellipse Height="70"
                                  VerticalAlignment="Center"
@@ -94,7 +98,8 @@
 
             </Grid>
 
-            <Grid Grid.Column="1">
+            <Grid Grid.Column="1"
+                  Name="Process_grid">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="50"/>
                     <RowDefinition Height="4.6*"/>
@@ -107,9 +112,9 @@
                            Style="{StaticResource txt_style}"
                            Text="Processes"/>
 
-                <ListView Foreground="Yellow"
+                <ListView Foreground="Blue"
                           Grid.Row="1"
-                          Name="mylistView"
+                          Name="allProcess"
                           BorderBrush="Black"
                           BorderThickness="0 0 3 0"
                           ItemsSource="{Binding Processes}"
@@ -119,7 +124,9 @@
                             <GridViewColumn Header="Id">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBlock MinWidth="40" Text="{Binding Id}"/>
+                                        <TextBlock MinWidth="60"
+                                                   HorizontalAlignment="Center"
+                                                   Text="{Binding Id}"/>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
@@ -147,7 +154,7 @@
                             <GridViewColumn Header="Machine Name">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBlock Text="{Binding MachineName}"/>
+                                        <TextBlock Text="{Binding StartTime}"/>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
@@ -158,6 +165,7 @@
                 <Border Grid.Row="2"
                         BorderThickness="0 3 3 3"
                         BorderBrush="Black"/>
+                
                 <Grid Grid.Row="2">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="3*"/>
@@ -166,12 +174,14 @@
                     </Grid.ColumnDefinitions>
 
                     <TextBox Style="{StaticResource txtBox_style}"
-                             Name="addProcess_txt"
                              />
 
                     <Button Grid.Column="1"
                             ToolTip="Create Process"
-                            Style="{StaticResource btnStyle}">
+                            Style="{StaticResource btnStyle}"
+                            Command="{Binding CreateProcessCommand}"
+                            CommandParameter="{Binding ElementName=Process_grid}"
+                            >
                         <Ellipse Height="70"
                                  VerticalAlignment="Center"
                                  HorizontalAlignment="Center"
@@ -184,7 +194,10 @@
 
                     <Button Grid.Column="2"
                             ToolTip="End Task"
-                            Style="{StaticResource btnStyle}">
+                            Style="{StaticResource btnStyle}"
+                            Command="{Binding EndTaskCommand}"
+                            CommandParameter="{Binding ElementName=allProcess}"
+                            >
                         <Ellipse Height="70"
                                  VerticalAlignment="Center"
                                  HorizontalAlignment="Center"

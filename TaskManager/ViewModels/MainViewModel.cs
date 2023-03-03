@@ -95,7 +95,6 @@ public class MainViewModel : BaseViewModel
                 process.Kill();
                 MessageBox.Show("Successfully End Task", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
-
         });
     }
 
@@ -110,9 +109,8 @@ public class MainViewModel : BaseViewModel
                 if (processes is null)
                     return;
                 foreach (var process in processes)
-                {
                     process.Kill();
-                }
+
                 MessageBox.Show("Items in blackList were successfully deleted", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
                 BlackList.Remove(black);
                 return;

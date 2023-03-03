@@ -86,7 +86,6 @@ public class MainViewModel : BaseViewModel
         {
             var process = (o as ListView)!.SelectedValue as Process;
 
-
             if (process is null)
                 MessageBox.Show("Select one of the items", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
             else
